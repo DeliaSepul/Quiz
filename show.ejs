@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
     <body>
-    <form method="get" action="/quizzes/<%= quiz.id %>/check" >
-    	 Pregunta: <%= quiz.question %> <p>
+    <h2>Quiz: el juego de las preguntas</h2>
+
+    <form method="get" action="/check">
+    	Pregunta:" <%= question %> "<p>
     	<input type='text' name="answer" value="<%= answer %>" placeholder="Responda aquí"/>
     	<input type="submit" value="Comprobar" />
     </form>

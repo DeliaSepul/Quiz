@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h2>Quiz: el juego de las preguntas</h2>
-
-    <p> La respuesta <strong><%= answer %></strong> es <%= result %>.</p>
-    <p> <a href="/show?answer=<%= answer %>"> Inténtelo otra vez </a></p>
+    <p> <%= result %>
+    <a href="/quizzes/<%= quiz.id %>"> Volver </a></p>
   </body>
 </html>
