@@ -1,6 +1,5 @@
 var models = require('../models');
 
-<<<<<<< HEAD
 //Autoload el quiz asociado a :quizId
 exports.load = function(req, res, next, quizId) {
 	models.Quiz.findById(quizId)
@@ -16,10 +15,18 @@ exports.load = function(req, res, next, quizId) {
 
 //GET /quizzes
 exports.index = function(req, res, next){
-	models.Quiz.findAll() //Busca la primera pregunta
-	.then(function(quizzes) {
-		res.render('quizzes/index.ejs', {quizzes: quizzes});
-	}).catch(function(error) { next(error); });
+	if(req.query.search == undefined){
+		models.Quiz.findAll() //Busca la primera pregunta
+		.then(function(quizzes) {
+			res.render('quizzes/index.ejs', {quizzes: quizzes});
+		})
+	} else{
+		var search = '%' +(String(req.query.search)).replace(/\s/g,"%")+'%' || '';
+		models.Quiz.findAll({where: {question: {$like: search }}}) 
+		.then(function(quizzes) {
+			res.render('quizzes/index.ejs', {quizzes: quizzes});
+		}).catch(function(error) { next(error); });
+	}
 };
 
 //GET /quizzes/:id
@@ -29,49 +36,10 @@ exports.show = function(req, res, next){
 		if(quiz){
 			var answer = req.query.answer || '';
 			res.render('quizzes/show', {quiz: req.quiz, answer: answer});
-=======
-//GET /quizzes
-exports.index = function(req, res, next){
-	models
-	.Quiz
-	.findAll() //Busca la primera pregunta
-	.then(function(quizzes) {
-		res.render('quizzes/index.ejs', {quizzes: quizzes});
-	}).catch(function(error) { next(error); });
-};
-
-//GET /quizzes/:id
-exports.show = function(req, res, next){
-	models
-	.Quiz
-	.findById(req.params.quizId) //Busca la primera pregunta
-	.then(function(quiz) {
-		if(quiz){
-			var answer = req.query.answer || '';
-			res.render('quizzes/show', {quiz: quiz, answer: answer});
 		} else {throw new Error('No existe ese quiz en la BBDD'); }
-		
 	}).catch(function(error) { next(error); });
 };
 
-
-//GET /quizzes/:id
-exports.check = function(req, res, next){
-	models
-	.Quiz
-	.findById(req.params.quizId) //Busca la primera pregunta
-	.then(function(quiz) {
-		if(quiz){
-			var answer = req.query.answer || '';
-			var result = answer === quiz.answer ? 'Correcta' : 'Incorrecta';
-			res.render('quizzes/result', {quiz: quiz, result: result, answer: answer});
->>>>>>> d417748fa44979bdefc0067bb824e81958ec24e3
-		} else {throw new Error('No existe ese quiz en la BBDD'); }
-		
-	}).catch(function(error) { next(error); });
-};
-
-<<<<<<< HEAD
 
 //GET /quizzes/:id
 exports.check = function(req, res){
@@ -86,5 +54,4 @@ exports.check = function(req, res){
 	}).catch(function(error) { next(error); });
 };
 
-=======
->>>>>>> d417748fa44979bdefc0067bb824e81958ec24e3
+
