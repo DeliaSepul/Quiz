@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
     <body>
@@ -12,3 +13,14 @@
 		</table>
   </body>
 </html>
+=======
+<table>
+	<% for (var i in quizzes) { %>
+	<tr>
+		<td>
+			<a href="/quizzes/<%= quizzes[i].id %>"><%= quizzes[i].question %></a>
+		</td>
+	</tr>
+	<% } %>
+</table>
+>>>>>>> d417748fa44979bdefc0067bb824e81958ec24e3
