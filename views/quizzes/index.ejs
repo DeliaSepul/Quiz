@@ -1,7 +1,10 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
     <body>
+    	<form method="get" action="/quizzes" >
+	    	<input type='text' name="search" placeholder="Búsqueda"/>
+	    	<input type="submit" value="Buscar" />
+    	</form>
 	    <table>
 			<% for (var i in quizzes) { %>
 			<tr>
@@ -13,14 +16,3 @@
 		</table>
   </body>
 </html>
-=======
-<table>
-	<% for (var i in quizzes) { %>
-	<tr>
-		<td>
-			<a href="/quizzes/<%= quizzes[i].id %>"><%= quizzes[i].question %></a>
-		</td>
-	</tr>
-	<% } %>
-</table>
->>>>>>> d417748fa44979bdefc0067bb824e81958ec24e3
