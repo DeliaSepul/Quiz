@@ -5,8 +5,10 @@ var Sequelize = require('sequelize');
 
 // Usar BBDD SQLite:
 //DATABASE_URL = sqlite:///
+
 //DATABASE_STORAGE = quiz.sqlite
 //Usar BBDD Postgres
+
 //DATABASE_URL = postgres://ewxwdzbktsiedb:f3ohX3A-ABn9w2SKU4aicZOFOK@ec2-174-129-18-170.compute-1.amazonaws.com:5432/d3cpu76fi9fgps
 
 var url, storage;
@@ -24,6 +26,7 @@ var sequelize = new Sequelize(url, {storage: storage, omitNull: true});
 var Quiz = sequelize.import(path.join(__dirname, 'quiz'));
 
 // sequelize.sync() crea e inicializa tabla de preguntas en DB
+
 sequelize.sync()
 .then(function() { //sync() crea la tabla quiz
 	return Quiz.count()
