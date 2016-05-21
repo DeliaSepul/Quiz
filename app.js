@@ -32,6 +32,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
 app.use(flash());
 
+
+//Logout automático
+app.use(function(req,res,next){
+    if (req.session.user){
+        if(req.session.user.inicio){
+          
+            if((new Date().getTime()-req.session.user.inicio)>120000){
+                req.session.user = undefined;
+               
+            }else {req.session.user.inicio = new Date().getTime();}
+           
+        } else {req.session.user.inicio = new Date().getTime();}
+
+    }
+    next();
+});
+
+
 // Helper dinamico:
 app.use(function(req, res, next) {
 
