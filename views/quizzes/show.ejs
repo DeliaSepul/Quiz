@@ -25,12 +25,14 @@
        var comment = quiz.Comments[i];
        if (comment.accepted) { %>
 
-           <li> <%= comment.text %> </li>
+           <p><li> <%= comment.text %></p>
+           <p>Usuario: <%= comment.AuthorId %></li></p>
 
        <% } else if (session.user && 
                      (session.user.isAdmin || (quiz.AuthorId === session.user.id))) { %>
 
-           <li> <%= comment.text %> </li>
+           <p><li> <%= comment.text %></p>
+           <p>Usuario: <%= comment.AuthorId %></li></p>
 
            <a href="/quizzes/<%= quiz.id %>/comments/<%= comment.id %>/accept?_method=PUT">
               <button>Aceptar</button>
